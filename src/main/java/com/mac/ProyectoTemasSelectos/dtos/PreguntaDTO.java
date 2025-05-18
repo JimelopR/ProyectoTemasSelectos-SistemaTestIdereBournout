@@ -4,8 +4,6 @@
  */
 package com.mac.ProyectoTemasSelectos.dtos;
 
-import java.util.List;
-
 /**
  *
  * @author jlopez
@@ -14,8 +12,7 @@ import java.util.List;
 public class PreguntaDTO {
     private Long id;
     private String texto;
-    private SubescalaDTO subescala;
-    private List<OpcionRespuestaDTO> opciones;
+    private Long idSubescala;
 
     public Long getId() {
         return id;
@@ -33,19 +30,11 @@ public class PreguntaDTO {
         this.texto = texto;
     }
 
-    public SubescalaDTO getSubescala() {
-        return subescala;
+    public Long getIdSubescala() {
+        return idSubescala;
     }
 
-    public void setSubescala(SubescalaDTO subescala) {
-        this.subescala = subescala;
-    }
-
-    public List<OpcionRespuestaDTO> getOpciones() {
-        return opciones;
-    }
-
-    public void setOpciones(List<OpcionRespuestaDTO> opciones) {
-        this.opciones = opciones;
+    public void setIdSubescala(Long idSubescala) {
+        this.idSubescala = idSubescala;
     }
 }

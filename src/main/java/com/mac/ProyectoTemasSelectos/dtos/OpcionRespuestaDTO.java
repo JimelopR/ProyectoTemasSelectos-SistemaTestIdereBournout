@@ -4,6 +4,8 @@
  */
 package com.mac.ProyectoTemasSelectos.dtos;
 
+import com.mac.ProyectoTemasSelectos.models.OpcionRespuestaModel;
+
 /**
  *
  * @author jlopez
@@ -13,6 +15,12 @@ public class OpcionRespuestaDTO {
     private Long id;
     private String texto;  // Ejemplo: "Nunca", "Una vez a la semana", etc.
     private int valor;     // Ejemplo: 0, 1, 2, ..., 5
+
+    public OpcionRespuestaDTO(OpcionRespuestaModel opcion) {
+        this.id = opcion.getId();
+        this.texto= opcion.getTexto();
+        this.valor=opcion.getValor();
+    }
 
     // Getters y setters
     public Long getId() {

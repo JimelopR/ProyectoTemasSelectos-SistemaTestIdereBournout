@@ -19,6 +19,15 @@ public class TestFormatoDTO {
     private String tipo; // "BURNOUT" o "IDERE"
     private List<PreguntaDTO> preguntas;
     private List<SubescalaDTO> subescalas;
+    private List<OpcionRespuestaDTO> opcionesRespuesta;
+
+    public List<OpcionRespuestaDTO> getOpcionesRespuesta() {
+        return opcionesRespuesta;
+    }
+
+    public void setOpcionesRespuesta(List<OpcionRespuestaDTO> opcionesRespuesta) {
+        this.opcionesRespuesta = opcionesRespuesta;
+    }
 
     public List<SubescalaDTO> getSubescalas() {
         return subescalas;

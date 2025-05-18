@@ -12,11 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.List;
 
 /**
  *
@@ -40,14 +37,6 @@ public class PreguntaModel {
     @JoinColumn(name = "subescala_id")
     private SubescalaModel subescala;
     
-    @ManyToMany
-    @JoinTable(
-      name = "pregunta_opciones_respuesta", 
-      joinColumns = @JoinColumn(name = "pregunta_id"), 
-      inverseJoinColumns = @JoinColumn(name = "opcion_respuesta_id"))
-    private List<OpcionRespuestaModel> opcionesRespuesta;
-    
-    
     // Agregar la anotación @JsonBackReference para la relación inversa
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -61,15 +50,6 @@ public class PreguntaModel {
     public void setUsuario(UsuarioModel usuario) {
         this.usuario = usuario;
     }
-
-    public List<OpcionRespuestaModel> getOpcionesRespuesta() {
-        return opcionesRespuesta;
-    }
-
-    public void setOpcionesRespuesta(List<OpcionRespuestaModel> opcionesRespuesta) {
-        this.opcionesRespuesta = opcionesRespuesta;
-    }
-    
     
 
     public SubescalaModel getSubescala() {

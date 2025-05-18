@@ -26,11 +26,12 @@ public class SubescalaDTO {
     // Rango alto
     private int rangoAltoMin;
     private int rangoAltoMax;
+    
+    private String descripcion;
 
     // Grupo (por ejemplo, "A", "B", o null)
     private String grupo;
     
-    private List<PreguntaDTO> preguntas;
 
     public Long getId() {
         return id;
@@ -104,13 +105,12 @@ public class SubescalaDTO {
         this.grupo = grupo;
     }
 
-    public List<PreguntaDTO> getPreguntas() {
-        return preguntas;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setPreguntas(List<PreguntaDTO> preguntas) {
-        this.preguntas = preguntas;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
- 
 }

@@ -9,11 +9,14 @@ import com.mac.ProyectoTemasSelectos.dtos.PreguntaDTO;
 import com.mac.ProyectoTemasSelectos.dtos.SubescalaDTO;
 import com.mac.ProyectoTemasSelectos.dtos.TestFormatoDTO;
 import com.mac.ProyectoTemasSelectos.exceptions.ResourceNotFoundException;
+import com.mac.ProyectoTemasSelectos.models.PreguntaModel;
+import com.mac.ProyectoTemasSelectos.models.SubescalaModel;
 import com.mac.ProyectoTemasSelectos.models.TestModel;
 import com.mac.ProyectoTemasSelectos.repositories.PreguntaRepository;
 import com.mac.ProyectoTemasSelectos.repositories.SubescalaRepository;
 import com.mac.ProyectoTemasSelectos.repositories.TestRepository;
 import com.mac.ProyectoTemasSelectos.services.TestService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,35 +112,38 @@ public class TestServiceImpl implements TestService {
             subescalaDTO.setRangoMedioMax(subescala.getRangoMedioMax());
             subescalaDTO.setRangoAltoMin(subescala.getRangoAltoMin());
             subescalaDTO.setRangoAltoMax(subescala.getRangoAltoMax());
+            subescalaDTO.setDescripcion(subescala.getDescripcion());
         
             // Incluimos el grupo en el DTO
             subescalaDTO.setGrupo(subescala.getGrupo());
 
-            // Mapeamos las preguntas de la subescala
-            List<PreguntaDTO> preguntasDTO = subescala.getPreguntas().stream().map(pregunta -> {
+            
+            return subescalaDTO;
+        }).toList();
+        
+        // Asignamos las subescalas al DTO del test
+        dto.setSubescalas(subescalasDTO);
+        
+        // Mapear preguntas con su subescala (por ID)
+        List<PreguntaDTO> preguntasDTO = new ArrayList<>();
+        for (SubescalaModel subescala : test.getSubescalas()) {
+            for (PreguntaModel pregunta : subescala.getPreguntas()) {
                 PreguntaDTO preguntaDTO = new PreguntaDTO();
                 preguntaDTO.setId(pregunta.getId());
                 preguntaDTO.setTexto(pregunta.getTexto());
+                preguntaDTO.setIdSubescala(subescala.getId());
+                preguntasDTO.add(preguntaDTO);
+            }
+        }
+        dto.setPreguntas(preguntasDTO);
+        
+        // Mapear las opciones de respuesta
+        List<OpcionRespuestaDTO> opcionesDTO = test.getOpcionesRespuesta().stream()
+            .map(opcion -> new OpcionRespuestaDTO(opcion))
+            .collect(Collectors.toList());
 
-                // Mapeamos las opciones de respuesta para la pregunta
-                List<OpcionRespuestaDTO> opcionDTOs = pregunta.getOpcionesRespuesta().stream().map(opcion -> {
-                    OpcionRespuestaDTO opcionDTO = new OpcionRespuestaDTO();
-                    opcionDTO.setId(opcion.getId());
-                    opcionDTO.setTexto(opcion.getTexto());
-                    opcionDTO.setValor(opcion.getValor());
-                    return opcionDTO;
-                }).toList();
-
-                preguntaDTO.setOpciones(opcionDTOs);
-                return preguntaDTO;
-            }).toList();
-
-            subescalaDTO.setPreguntas(preguntasDTO);
-            return subescalaDTO;
-        }).toList();
-
-        // Asignamos las subescalas al DTO del test
-        dto.setSubescalas(subescalasDTO);
+        // Asignar las opciones de respuesta al DTO
+        dto.setOpcionesRespuesta(opcionesDTO);
         return dto;
     }
 }

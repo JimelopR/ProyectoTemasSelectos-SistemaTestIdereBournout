@@ -31,20 +31,31 @@ public class SubescalaModel {
     @Column(name = "nombre", length = 100)
     private String nombre; // Ej: "Cansancio emocional", "Ansiedad como estado"
 
+    @Column(name = "descripcion", length = 100)
+    private String descripcion;
+
     @ManyToOne
     @JoinColumn(name = "test_id")
     private TestModel test;
 
     // Rango bajo, medio, alto
+    @Column(name = "rango_bajo_min")
     private int rangoBajoMin;
+    @Column(name = "rango_bajo_max")
     private int rangoBajoMax;
     
+    @Column(name = "rango_medio_min")
     private int rangoMedioMin;
+    @Column(name = "rango_medio_max")
     private int rangoMedioMax;
  
+    @Column(name = "rango_alto_min")
     private int rangoAltoMin;
+    
+     @Column(name = "rango_alto_max")
     private int rangoAltoMax;
     
+    @Column(name = "grupo", length = 100)
     private String grupo; // valores como "A" o "B" para IDARE, o null para otros tests
 
     @OneToMany(mappedBy = "subescala", cascade = CascadeType.ALL)
@@ -138,4 +149,13 @@ public class SubescalaModel {
     public void setPreguntas(List<PreguntaModel> preguntas) {
         this.preguntas = preguntas;
     }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
 }
