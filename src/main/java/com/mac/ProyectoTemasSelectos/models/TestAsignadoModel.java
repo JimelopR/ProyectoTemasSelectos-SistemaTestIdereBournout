@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 @Entity
 @Table(name = "test_asignados")
@@ -35,8 +35,16 @@ public class TestAsignadoModel {
     private UsuarioModel evaluado;  // Usuario que va a responder
 
     @ManyToOne
-    @JoinColumn(name = "test_id")
-    private TestModel test;  // El test que se asigna
+    @JoinColumn(name = "id_test")
+    private TestModel test;
+
+    public TestModel getTest() {
+        return test;
+    }
+
+    public void setTest(TestModel test) {
+        this.test = test;
+    }
 
     @Column(name = "completado")
     private boolean completado;  // Si el evaluado ya completó el test
@@ -105,14 +113,7 @@ public class TestAsignadoModel {
         this.evaluado = evaluado;
     }
 
-    public TestModel getTest() {
-        return test;
-    }
-
-    public void setTest(TestModel test) {
-        this.test = test;
-    }
-
+   
     public boolean isCompletado() {
         return completado;
     }

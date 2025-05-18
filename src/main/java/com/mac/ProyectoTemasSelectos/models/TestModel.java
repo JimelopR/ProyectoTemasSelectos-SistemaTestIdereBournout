@@ -40,15 +40,15 @@ public class TestModel {
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
     private List<SubescalaModel> subescalas;
 
-    public List<SubescalaModel> getSubescalas() {
-        return subescalas;
-    }
-    
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OpcionRespuestaModel> opcionesRespuesta;
 
     public List<OpcionRespuestaModel> getOpcionesRespuesta() {
         return opcionesRespuesta;
+    }
+    
+      public List<SubescalaModel> getSubescalas() {
+        return subescalas;
     }
 
     public void setOpcionesRespuesta(List<OpcionRespuestaModel> opcionesRespuesta) {

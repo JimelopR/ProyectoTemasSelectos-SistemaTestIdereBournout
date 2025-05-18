@@ -26,35 +26,41 @@ public class RespuestaModel {
     private Long id;
     
     @Column(name = "valor")
-    private Integer valor; // por ejemplo, del 1 al 5
-
-    @ManyToOne
+    private int valor; // por ejemplo, del 1 al 5
+    
+     @ManyToOne
     @JoinColumn(name = "pregunta_id")
     private PreguntaModel pregunta;
 
-    @ManyToOne
-    @JoinColumn(name = "resultado_test_id")
-    private ResultadoTestModel resultadoTest;
     
     @ManyToOne
-    @JoinColumn(name = "opcion_respuesta_id")
-    private OpcionRespuestaModel opcionSeleccionada;
+    @JoinColumn(name = "resultado_id")
+    private ResultadoTestModel resultado;
+
 
     public int getValor() {
-        return opcionSeleccionada != null ? opcionSeleccionada.getValor() : 0;
+        return valor;
     }
 
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public ResultadoTestModel getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(ResultadoTestModel resultado) {
+        this.resultado = resultado;
+    }
+
+   
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-    public void setValor(Integer valor) {
-        this.valor = valor;
     }
    
 
@@ -67,10 +73,10 @@ public class RespuestaModel {
     }
 
     public ResultadoTestModel getResultadoTest() {
-        return resultadoTest;
+        return resultado;
     }
 
-    public void setResultadoTest(ResultadoTestModel resultadoTest) {
-        this.resultadoTest = resultadoTest;
+    public void setResultadoTest(ResultadoTestModel resultado) {
+        this.resultado = resultado;
     }
 }

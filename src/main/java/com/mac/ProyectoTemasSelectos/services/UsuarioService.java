@@ -17,4 +17,5 @@ public interface UsuarioService {
     String generarContrasenaAleatoria();
     List<UsuarioDTO> obtenerTodosLosUsuarios();
     boolean checkPassword(String rawPassword, String encodedPassword);
+    List<UsuarioDTO> obtenerEvaluadosDisponibles();
 }

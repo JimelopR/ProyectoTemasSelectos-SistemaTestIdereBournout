@@ -4,7 +4,9 @@
  */
 package com.mac.ProyectoTemasSelectos.controllers;
 
+import com.mac.ProyectoTemasSelectos.dtos.ResultadoTestDTO;
 import com.mac.ProyectoTemasSelectos.models.UsuarioModel;
+import com.mac.ProyectoTemasSelectos.services.TestMostrarService;
 import com.mac.ProyectoTemasSelectos.utils.CustomUserDetailsUtil;
 import com.mac.ProyectoTemasSelectos.utils.JwtUtil;
 import java.util.Collection;
@@ -20,6 +22,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +39,9 @@ public class UsuarioController {
     private JwtUtil jwtService;
     @Autowired
     private AuthenticationManager authenticationManager;
+      
+    @Autowired
+    private TestMostrarService testMostrarService;
 
     @PostMapping("/loginUsuario")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UsuarioModel usuarioModel) {
@@ -74,5 +81,11 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Credenciales inválidas"));
         }
   
-    }   
+    } 
+
+    @GetMapping("/obtenerResultado/{idTestAsignado}")
+    public ResponseEntity<ResultadoTestDTO> obtenerResultado(@PathVariable Long idTestAsignado) {
+        ResultadoTestDTO resultado = testMostrarService.obtenerResultado(idTestAsignado);
+        return ResponseEntity.ok(resultado);
+    }
 }

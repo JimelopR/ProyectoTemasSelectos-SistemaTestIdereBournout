@@ -5,12 +5,15 @@
 package com.mac.ProyectoTemasSelectos.services;
 
 import com.mac.ProyectoTemasSelectos.dtos.TestAsignadoDTO;
-import com.mac.ProyectoTemasSelectos.models.TestAsignadoModel;
+import com.mac.ProyectoTemasSelectos.dtos.TestRespuestaDTO;
+import java.util.List;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public interface TestAsignadoService {
-    TestAsignadoModel asignarTest(TestAsignadoDTO dto);
+    void asignarTest(TestAsignadoDTO dto);
+    List<TestAsignadoDTO> obtenerTestsPendientesDelEvaluado(Long evaluadoId);
+    void guardarRespuestasYEvaluar(TestRespuestaDTO dto);
 }

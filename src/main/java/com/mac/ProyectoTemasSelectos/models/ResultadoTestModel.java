@@ -10,10 +10,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,25 +26,55 @@ import java.util.List;
 @Entity
 @Table(name = "resultados_test")
 public class ResultadoTestModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "test_id")
     private TestModel test;
-
-    @ManyToOne
-    private UsuarioModel evaluado;
     
-    @Column(name = "fecha")
-    private LocalDateTime fecha;
-     
-    @Column(name = "puntuacion_total")
-    private Integer puntuacionTotal;
+    @OneToOne
+    @JoinColumn(name = "test_asignado_id")
+    private TestAsignadoModel testAsignado;
 
-    @OneToMany(mappedBy = "resultadoTest", cascade = CascadeType.ALL)
-    private List<RespuestaModel> respuestas;
+    
+    @Column(name = "fecha_resultado")
+    private LocalDateTime fechaResultado;
+
+    @Column(name = "interpretacion", columnDefinition = "TEXT")
+    private String interpretacion;
+    
+    
+    @OneToMany(mappedBy = "resultado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RespuestaModel> respuestas = new ArrayList<>();
+
+    public TestAsignadoModel getTestAsignado() {
+        return testAsignado;
+    }
+
+    public void setTestAsignado(TestAsignadoModel testAsignado) {
+        this.testAsignado = testAsignado;
+    }
+
+    public LocalDateTime getFechaResultado() {
+        return fechaResultado;
+    }
+
+    public void setFechaResultado(LocalDateTime fechaResultado) {
+        this.fechaResultado = fechaResultado;
+    }
+
+    public String getInterpretacion() {
+        return interpretacion;
+    }
+
+    public void setInterpretacion(String interpretacion) {
+        this.interpretacion = interpretacion;
+    }
+
+
 
     public Long getId() {
         return id;
@@ -57,30 +90,6 @@ public class ResultadoTestModel {
 
     public void setTest(TestModel test) {
         this.test = test;
-    }
-
-    public UsuarioModel getEvaluado() {
-        return evaluado;
-    }
-
-    public void setEvaluado(UsuarioModel evaluado) {
-        this.evaluado = evaluado;
-    }
-
-    public LocalDateTime getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
-
-    public Integer getPuntuacionTotal() {
-        return puntuacionTotal;
-    }
-
-    public void setPuntuacionTotal(Integer puntuacionTotal) {
-        this.puntuacionTotal = puntuacionTotal;
     }
 
     public List<RespuestaModel> getRespuestas() {

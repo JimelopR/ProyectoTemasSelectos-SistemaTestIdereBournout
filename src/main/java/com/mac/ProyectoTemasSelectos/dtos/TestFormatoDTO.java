@@ -4,12 +4,11 @@
  */
 package com.mac.ProyectoTemasSelectos.dtos;
 
-import com.mac.ProyectoTemasSelectos.models.SubescalaModel;
 import java.util.List;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class TestFormatoDTO {
 

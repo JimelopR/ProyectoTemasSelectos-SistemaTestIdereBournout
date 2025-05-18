@@ -4,11 +4,10 @@
  */
 package com.mac.ProyectoTemasSelectos.dtos;
 
-import java.util.List;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class SubescalaDTO {
     

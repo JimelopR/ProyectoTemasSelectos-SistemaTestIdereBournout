@@ -6,11 +6,13 @@ package com.mac.ProyectoTemasSelectos.repositories;
 
 import com.mac.ProyectoTemasSelectos.models.TestModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  *  @author jimena
  */
+@Repository
 public interface TestRepository extends JpaRepository<TestModel, Long>{
     
 }

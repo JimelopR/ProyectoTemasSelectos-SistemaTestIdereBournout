@@ -5,10 +5,10 @@
 package com.mac.ProyectoTemasSelectos.controllers;
 
 import com.mac.ProyectoTemasSelectos.dtos.EmailDTO;
-import com.mac.ProyectoTemasSelectos.dtos.TestFormatoDTO;
+import com.mac.ProyectoTemasSelectos.dtos.TestMostrarDTO;
 import com.mac.ProyectoTemasSelectos.dtos.UsuarioDTO;
 import com.mac.ProyectoTemasSelectos.models.UsuarioModel;
-import com.mac.ProyectoTemasSelectos.services.TestService;
+import com.mac.ProyectoTemasSelectos.services.TestMostrarService;
 import com.mac.ProyectoTemasSelectos.services.UsuarioService;
 import com.mac.ProyectoTemasSelectos.utils.EmailUtil;
 import jakarta.mail.MessagingException;
@@ -18,9 +18,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +35,9 @@ public class AdminController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private TestService testService;
-    @Autowired
     private EmailUtil emailService;
+     @Autowired
+    private TestMostrarService testMostrarService;
 
 
     // ------------------ GESTIÓN DE USUARIOS ------------------
@@ -99,12 +97,12 @@ public class AdminController {
 
     // ------------------ GESTIÓN DE TESTS ------------------
 
-    @GetMapping("/tests")
+    /*@GetMapping("/tests")
     public ResponseEntity<List<TestFormatoDTO>> obtenerTests() {
         return ResponseEntity.ok(testService.obtenerTodos());
     }
 
-    /*@PostMapping("/tests")
+    @PostMapping("/tests")
     public ResponseEntity<?> crearTest(@RequestBody TestModel test) {
         testService.crearTest(test);
         return ResponseEntity.ok("Test creado correctamente.");
@@ -114,11 +112,18 @@ public class AdminController {
     public ResponseEntity<?> actualizarTest(@PathVariable Long id, @RequestBody TestModel test) {
         testService.actualizarTest(id, test);
         return ResponseEntity.ok("Test actualizado correctamente.");
-    }*/
+    }
 
     @DeleteMapping("/tests/{id}")
     public ResponseEntity<?> eliminarTest(@PathVariable Long id) {
         testService.eliminarTest(id);
         return ResponseEntity.ok("Test eliminado correctamente.");
+    }*/
+    
+    //------------Para estadisticas (Pantalla Dashboard)---------------
+    @GetMapping("/test-existentes")
+    public ResponseEntity<List<TestMostrarDTO>> obtenerTodos() {
+        List<TestMostrarDTO> resultado = testMostrarService.obtenerTodosParaAdmin();
+        return ResponseEntity.ok(resultado);
     }
 }

@@ -6,29 +6,29 @@ package com.mac.ProyectoTemasSelectos.dtos;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class RespuestaDTO {
-    private Long id;
-    private String texto;
+    private Long preguntaId;
     private Integer valor;
+    private String pregunta;
 
-    public Long getId() {
-        return id;
+    public String getPregunta() {
+        return pregunta;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
     }
 
-    public String getTexto() {
-        return texto;
+    public Long getPreguntaId() {
+        return preguntaId;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setPreguntaId(Long preguntaId) {
+        this.preguntaId = preguntaId;
     }
-
+    
     public Integer getValor() {
         return valor;
     }

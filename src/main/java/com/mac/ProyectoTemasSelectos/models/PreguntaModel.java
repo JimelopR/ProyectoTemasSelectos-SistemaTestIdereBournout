@@ -37,20 +37,7 @@ public class PreguntaModel {
     @JoinColumn(name = "subescala_id")
     private SubescalaModel subescala;
     
-    // Agregar la anotación @JsonBackReference para la relación inversa
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    @JsonBackReference
-    private UsuarioModel usuario;
 
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
-    }
-    
 
     public SubescalaModel getSubescala() {
         return subescala;

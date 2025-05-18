@@ -6,7 +6,7 @@ package com.mac.ProyectoTemasSelectos.dtos;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class UsuarioDTO {
     private Long id;

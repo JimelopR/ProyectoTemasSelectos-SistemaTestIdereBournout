@@ -47,6 +47,7 @@ public class WebSecurityConfig {
             .requestMatchers("/api/admin/**").hasRole("ADMINISTRADOR")
             .requestMatchers("/api/evaluador/**").hasRole("EVALUADOR")
             .requestMatchers("/api/evaluado/**").hasRole("EVALUADO")
+            .requestMatchers("/obtenerResultado/{idTestAsignado}").hasAnyRole("ADMINISTRADOR", "EVALUADOR", "EVALUADO")
             .anyRequest().authenticated()
         .and()
         .formLogin()

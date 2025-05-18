@@ -74,6 +74,18 @@ public class UsuarioServiceImpl implements UsuarioService{
     public boolean checkPassword(String rawPassword, String encodedPassword) {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
-  
     
+    @Override
+    public List<UsuarioDTO> obtenerEvaluadosDisponibles() {
+        List<UsuarioModel> evaluados = usuarioRepository.findByIdTipoUsuario(3);
+        return evaluados.stream().map(u -> {
+            UsuarioDTO dto = new UsuarioDTO();
+                dto.setId(u.getId());
+                dto.setNombre(u.getNombre()+" "+u.getApellidoPaterno()+" "+u.getApellidoMaterno());
+                dto.setCorreo(u.getCorreo());
+                dto.setRol(3);
+                return dto;
+         }).toList();
+    }
+   
 }

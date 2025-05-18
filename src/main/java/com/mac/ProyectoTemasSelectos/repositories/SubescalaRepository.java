@@ -7,11 +7,13 @@ package com.mac.ProyectoTemasSelectos.repositories;
 import com.mac.ProyectoTemasSelectos.models.SubescalaModel;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
+@Repository
 public interface SubescalaRepository extends JpaRepository<SubescalaModel, Long>{
 
     public List<SubescalaModel> findByTestId(Long testId);

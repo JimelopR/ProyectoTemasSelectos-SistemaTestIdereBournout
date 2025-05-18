@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class TestAsignadoDTO {
     
@@ -18,9 +18,34 @@ public class TestAsignadoDTO {
     private boolean completado;
     private LocalDateTime fechaAsignacion;
     private LocalDateTime fechaRespuesta;
+    private int edadEvaluado;
+     private boolean trabaja;
+    private String genero;
 
-    // Getters y Setters
+    public int getEdadEvaluado() {
+        return edadEvaluado;
+    }
 
+    public void setEdadEvaluado(int edadEvaluado) {
+        this.edadEvaluado = edadEvaluado;
+    }
+
+    public boolean isTrabaja() {
+        return trabaja;
+    }
+
+    public void setTrabaja(boolean trabaja) {
+        this.trabaja = trabaja;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+   
     public Long getEvaluadorId() {
         return evaluadorId;
     }

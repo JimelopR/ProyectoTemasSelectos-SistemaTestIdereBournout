@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,7 +60,7 @@ public class SubescalaModel {
     private String grupo; // valores como "A" o "B" para IDARE, o null para otros tests
 
     @OneToMany(mappedBy = "subescala", cascade = CascadeType.ALL)
-    private List<PreguntaModel> preguntas;
+    private List<PreguntaModel> preguntas = new ArrayList<PreguntaModel>();
     
     
     public String getGrupo() {

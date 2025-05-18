@@ -5,13 +5,13 @@
 package com.mac.ProyectoTemasSelectos.controllers;
 
 import com.mac.ProyectoTemasSelectos.dtos.TestAsignadoDTO;
-import com.mac.ProyectoTemasSelectos.dtos.TestAsignadoResponseDTO;
-import com.mac.ProyectoTemasSelectos.exceptions.ResourceNotFoundException;
-import com.mac.ProyectoTemasSelectos.models.TestAsignadoModel;
-import com.mac.ProyectoTemasSelectos.repositories.TestAsignadoRepository;
+import com.mac.ProyectoTemasSelectos.dtos.TestMostrarDTO;
+import com.mac.ProyectoTemasSelectos.dtos.UsuarioDTO;
 import com.mac.ProyectoTemasSelectos.services.TestAsignadoService;
+import com.mac.ProyectoTemasSelectos.services.TestMostrarService;
+import com.mac.ProyectoTemasSelectos.services.UsuarioService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 @RestController
 @RequestMapping("/api/evaluador")
@@ -30,17 +30,19 @@ public class EvaluadorController {
     
     @Autowired
     private TestAsignadoService testAsignadoService;
+    @Autowired
+    private TestMostrarService testMostrarService;
     
     @Autowired
-    private TestAsignadoRepository testAsignadoRepository;
+    private UsuarioService usuarioService;
     
     // Endpoint para asignar un test usando el DTO
     @PostMapping("/asignarTest")
-    public ResponseEntity<TestAsignadoModel> asignarTest(@RequestBody TestAsignadoDTO dto) {
-        TestAsignadoModel testAsignado = testAsignadoService.asignarTest(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(testAsignado);
-    }
-    @GetMapping("obtenerTest/{id}")
+    public ResponseEntity<?> asignarTest(@RequestBody TestAsignadoDTO dto) {
+        testAsignadoService.asignarTest(dto);
+        return ResponseEntity.ok("Test asignado correctamente");
+}
+    /*@GetMapping("obtenerTest/{id}")
     public ResponseEntity<TestAsignadoResponseDTO> obtenerTestAsignado(@PathVariable Long id) {
         TestAsignadoModel testAsignado = testAsignadoRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Test asignado no encontrado"));
@@ -55,6 +57,16 @@ public class EvaluadorController {
         dto.setFechaRespuesta(testAsignado.getFechaRespuesta());
 
         return ResponseEntity.ok(dto);
+    }*/
+    @GetMapping("/obtenerEvaluados")
+    public ResponseEntity<List<UsuarioDTO>> getEvaluadosDisponibles() {
+        return ResponseEntity.ok(usuarioService.obtenerEvaluadosDisponibles());
     }
-
+    
+    
+    @GetMapping("/test-existentes/{idEvaluador}")
+    public ResponseEntity<List<TestMostrarDTO>> obtenerTestsPorEvaluador(@PathVariable Long idEvaluador) {
+        List<TestMostrarDTO> resultado = testMostrarService.obtenerParaEvaluador(idEvaluador);
+        return ResponseEntity.ok(resultado);   
+    }
 }

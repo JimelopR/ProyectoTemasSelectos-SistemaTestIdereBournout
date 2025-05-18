@@ -6,7 +6,7 @@ package com.mac.ProyectoTemasSelectos.exceptions;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class ResourceNotFoundException extends RuntimeException {
 

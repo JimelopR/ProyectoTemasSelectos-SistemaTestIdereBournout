@@ -8,7 +8,7 @@ import com.mac.ProyectoTemasSelectos.models.OpcionRespuestaModel;
 
 /**
  *
- * @author jlopez
+ * @author jimena
  */
 public class OpcionRespuestaDTO {
 

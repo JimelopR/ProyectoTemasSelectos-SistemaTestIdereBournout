@@ -12,8 +12,6 @@ import com.mac.ProyectoTemasSelectos.exceptions.ResourceNotFoundException;
 import com.mac.ProyectoTemasSelectos.models.PreguntaModel;
 import com.mac.ProyectoTemasSelectos.models.SubescalaModel;
 import com.mac.ProyectoTemasSelectos.models.TestModel;
-import com.mac.ProyectoTemasSelectos.repositories.PreguntaRepository;
-import com.mac.ProyectoTemasSelectos.repositories.SubescalaRepository;
 import com.mac.ProyectoTemasSelectos.repositories.TestRepository;
 import com.mac.ProyectoTemasSelectos.services.TestService;
 import java.util.ArrayList;
@@ -32,10 +30,6 @@ public class TestServiceImpl implements TestService {
     
     @Autowired
     private TestRepository testRepository;
-    @Autowired
-    private SubescalaRepository subescalaRepository;
-    @Autowired
-    private PreguntaRepository preguntaRepository;
 
     @Transactional(readOnly = true)
     public List<TestFormatoDTO> obtenerTodos() {
