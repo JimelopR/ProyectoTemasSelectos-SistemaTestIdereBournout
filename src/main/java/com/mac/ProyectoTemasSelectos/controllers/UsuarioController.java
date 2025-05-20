@@ -9,11 +9,15 @@ import com.mac.ProyectoTemasSelectos.models.UsuarioModel;
 import com.mac.ProyectoTemasSelectos.services.TestMostrarService;
 import com.mac.ProyectoTemasSelectos.utils.CustomUserDetailsUtil;
 import com.mac.ProyectoTemasSelectos.utils.JwtUtil;
+import com.mac.ProyectoTemasSelectos.utils.PdfGeneradorUtil;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,6 +46,8 @@ public class UsuarioController {
       
     @Autowired
     private TestMostrarService testMostrarService;
+    @Autowired
+    private PdfGeneradorUtil pdfGeneratorService;
 
     @PostMapping("/loginUsuario")
     public ResponseEntity<Map<String, Object>> login(@RequestBody UsuarioModel usuarioModel) {
@@ -89,5 +95,28 @@ public class UsuarioController {
     public ResponseEntity<ResultadoTestDTO> obtenerResultado(@PathVariable Long idTestAsignado) {
         ResultadoTestDTO resultado = testMostrarService.obtenerResultado(idTestAsignado);
         return ResponseEntity.ok(resultado);
+    }
+    @GetMapping("/descargar-pdf/{idAsignacion}")
+    public ResponseEntity<byte[]> downloadTestResultPdf(@PathVariable Long idAsignacion) {
+        try {
+            byte[] pdfBytes = pdfGeneratorService.generarTestResultadoPdfFromHtml(idAsignacion); // Llama al nuevo método
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("filename", "resultado_test_" + idAsignacion + ".pdf");
+            headers.setContentLength(pdfBytes.length);
+
+            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+
+        } catch (IOException e) {
+            // Manejo de errores de IO o generación de PDF
+            return new ResponseEntity<>(("Error al generar el PDF: " + e.getMessage()).getBytes(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (RuntimeException e) {
+            // Manejo de test no encontrado u otros errores de negocio
+            return new ResponseEntity<>(e.getMessage().getBytes(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // Manejo de cualquier otra excepción inesperada
+            return new ResponseEntity<>(("Error inesperado: " + e.getMessage()).getBytes(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

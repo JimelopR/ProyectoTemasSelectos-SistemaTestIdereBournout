@@ -43,6 +43,7 @@ com/mac/ProyectoTemasSelectos/utils/CustomUserDetailsUtil$UsuarioConNombre.class
 com/mac/ProyectoTemasSelectos/models/TestModel.class
 com/mac/ProyectoTemasSelectos/services/TestService.class
 com/mac/ProyectoTemasSelectos/services/TestAsignadoService.class
+com/mac/ProyectoTemasSelectos/utils/PdfGeneradorUtil.class
 com/mac/ProyectoTemasSelectos/services/UsuarioService.class
 com/mac/ProyectoTemasSelectos/dtos/TestFormatoDTO.class
 com/mac/ProyectoTemasSelectos/dtos/RespuestaDTO.class
