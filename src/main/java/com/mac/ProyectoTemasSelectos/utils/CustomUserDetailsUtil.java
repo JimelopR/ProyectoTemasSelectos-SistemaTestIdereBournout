@@ -33,20 +33,27 @@ public class CustomUserDetailsUtil implements UserDetailsService {
     public class UsuarioConNombre extends User {
         private final String nombre;
         private final String apellidoPaterno;  // Agregamos apellidoPaterno
-        private final String apellidoMaterno;  // Agregamos apellidoMaterno
+        private final String apellidoMaterno;
+        private final Long id;// Agregamos apellidoMaterno
 
         public UsuarioConNombre(String username, String password, boolean enabled, boolean accountNonExpired,
                                 boolean credentialsNonExpired, boolean accountNonLocked,
-                                List<SimpleGrantedAuthority> authorities, String nombre, String apellidoPaterno, String apellidoMaterno) { // Modificamos el constructor
+                                List<SimpleGrantedAuthority> authorities, String nombre, String apellidoPaterno, String apellidoMaterno, Long id) { // Modificamos el constructor
             super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
             this.nombre = nombre;
             this.apellidoPaterno = apellidoPaterno;
             this.apellidoMaterno = apellidoMaterno;
+            this.id = id;
         }
 
         public String getNombre() {
             return nombre + " " + apellidoPaterno + " " + apellidoMaterno; // Modificamos el método para concatenar
         }
+        public Long getId(){
+            return id;
+        }
+        
+       
     }
 
 
@@ -81,6 +88,8 @@ public class CustomUserDetailsUtil implements UserDetailsService {
             case 3 -> "ROLE_EVALUADO";
             default -> "ROLE_USUARIO";
         }; 
+        
+        Long id = usuario.getId();
 
         // Devuelve un objeto UserDetails que incluye el nombre
         return new UsuarioConNombre(
@@ -93,7 +102,8 @@ public class CustomUserDetailsUtil implements UserDetailsService {
                 List.of(new SimpleGrantedAuthority(rol)), // Lista de autoridades
                 usuario.getNombre(),  
                 usuario.getApellidoPaterno(), 
-                usuario.getApellidoMaterno() 
+                usuario.getApellidoMaterno(),id
+                
         );
     }
 }

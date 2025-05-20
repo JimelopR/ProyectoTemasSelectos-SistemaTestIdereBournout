@@ -73,6 +73,8 @@ public class UsuarioController {
       
                 if (userDetails instanceof CustomUserDetailsUtil.UsuarioConNombre usuarioConNombre) {
                     respuesta.put("nombre", usuarioConNombre.getNombre());
+                    respuesta.put("id", usuarioConNombre.getId());
+                    
                 } else {
                     respuesta.put("nombre", "Nombre no disponible");
                 }
