@@ -11,7 +11,11 @@ import java.time.LocalDateTime;
  * @author jimena
  */
 public class TestAsignadoDTO {
-    
+    private Long idTestAsignado;
+
+    public Long getIdTestAsignado() {
+        return idTestAsignado;
+    }
     private Long evaluadorId;
     private Long evaluadoId;
     private Long testId;
@@ -93,4 +97,9 @@ public class TestAsignadoDTO {
     public void setFechaRespuesta(LocalDateTime fechaRespuesta) {
         this.fechaRespuesta = fechaRespuesta;
     }
+
+    public void setIdTestAsignado(Long idTestAsignado) {
+        this.idTestAsignado = idTestAsignado; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

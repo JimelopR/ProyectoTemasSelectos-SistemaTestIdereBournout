@@ -80,6 +80,7 @@ public class TestAsignadoServiceImpl implements TestAsignadoService{
 
         return asignados.stream().map(asignado -> {
             TestAsignadoDTO dto = new TestAsignadoDTO();
+            dto.setIdTestAsignado(asignado.getId());
             dto.setEvaluadorId(asignado.getEvaluador().getId());
             dto.setEvaluadoId(asignado.getEvaluado().getId());
             dto.setTestId(asignado.getTest().getId());
